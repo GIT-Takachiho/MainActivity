@@ -6,7 +6,8 @@ import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
-
+import com.google.android.material.snackbar.Snackbar
+import android.content.Intent       //テスト追加
 
 class MainActivity : AppCompatActivity() , FragmentCallback {
 
@@ -32,15 +33,16 @@ class MainActivity : AppCompatActivity() , FragmentCallback {
             tab.setText(viewPagerAdapter.titleIds[position])
         }.attach()
     }
-
-    override fun onClickItem(url: String) {
-        WebViewActivity.start(this, url)
+    override fun onClickItem(shop: Shop) {
+//    override fun onClickItem(url: String) {
+        WebViewActivity.start(this, shop)
     }
 
     override fun onAddFavorite(shop: Shop) { // Favoriteに追加するときのメソッド(Fragment -> Activity へ通知する)
         FavoriteShop.insert(FavoriteShop().apply {
             id = shop.id
             name = shop.name
+            address = shop.address
             imageUrl = shop.logoImage
             url = if (shop.couponUrls.sp.isNotEmpty()) shop.couponUrls.sp else shop.couponUrls.pc
         })

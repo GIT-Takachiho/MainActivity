@@ -8,6 +8,7 @@ open class FavoriteShop: RealmObject() {
     @PrimaryKey
     var id: String = ""
     var imageUrl: String = ""
+    var address: String = ""
     var name: String = ""
     var url: String = ""
 
